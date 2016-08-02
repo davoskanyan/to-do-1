@@ -1,6 +1,4 @@
-System.register([], function(exports_1, context_1) {
-    "use strict";
-    var __moduleName = context_1 && context_1.id;
+System.register([], function(exports_1) {
     var TaskItem, ListItem;
     return {
         setters:[],
@@ -9,7 +7,7 @@ System.register([], function(exports_1, context_1) {
                 function TaskItem(name, completed, id) {
                     this.name = name;
                     this.completed = completed;
-                    // this.id = id || this.getNextId();
+                    this.id = id;
                 }
                 TaskItem.prototype.getNextId = function (listItems) {
                     var maxId = 0;
@@ -21,10 +19,14 @@ System.register([], function(exports_1, context_1) {
                     return ++maxId;
                 };
                 TaskItem.fromJson = function (responseJson) {
-                    return JSON.parse(responseJson);
+                    var taskItems = [];
+                    JSON.parse(responseJson).forEach(function (node) {
+                        taskItems.push(new TaskItem(node.name, node.completed, node.id));
+                    });
+                    return taskItems;
                 };
                 return TaskItem;
-            }());
+            })();
             exports_1("TaskItem", TaskItem);
             ListItem = (function () {
                 function ListItem(name, id) {
@@ -39,7 +41,7 @@ System.register([], function(exports_1, context_1) {
                     return listItems;
                 };
                 return ListItem;
-            }());
+            })();
             exports_1("ListItem", ListItem);
         }
     }

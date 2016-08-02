@@ -1,6 +1,4 @@
-System.register(["@angular/core", "../models", "../services/listService"], function(exports_1, context_1) {
-    "use strict";
-    var __moduleName = context_1 && context_1.id;
+System.register(["@angular/core", "../models", "../services/listService"], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -29,19 +27,16 @@ System.register(["@angular/core", "../models", "../services/listService"], funct
                     this.listService = listService;
                     this.completedTaskItems = [];
                     this.notCompletedTaskItems = [];
-                    this.allTaskItems = {};
+                    this.allTaskItems = [];
                 }
                 Tasks.prototype.initTaskItems = function () {
                     this.completedTaskItems = [];
                     this.notCompletedTaskItems = [];
-                    if (!this.allTaskItems[this.selectedList.id]) {
-                        this.allTaskItems[this.selectedList.id] = {
-                            name: this.selectedList.name,
-                            tasks: []
-                        };
+                    if (!this.allTaskItems) {
+                        this.allTaskItems = [];
                     }
                     else {
-                        for (var _i = 0, _a = this.allTaskItems[this.selectedList.id].tasks; _i < _a.length; _i++) {
+                        for (var _i = 0, _a = this.allTaskItems; _i < _a.length; _i++) {
                             var taskItem = _a[_i];
                             if (taskItem.completed == true) {
                                 this.completedTaskItems.push(taskItem);
@@ -59,10 +54,9 @@ System.register(["@angular/core", "../models", "../services/listService"], funct
                     if (newTaskElement.value.replace(/\s/g, '') == "") {
                         return;
                     }
-                    var currentTaskItems = this.allTaskItems[this.selectedList.id].tasks;
-                    var nextId = this.getNextId(currentTaskItems);
+                    var nextId = this.getNextId(this.allTaskItems);
                     var newTaskItem = new models_1.TaskItem(newTaskElement.value, false, nextId);
-                    currentTaskItems.push(newTaskItem);
+                    this.allTaskItems.push(newTaskItem);
                     newTaskElement.value = "";
                     this.initTaskItems();
                 };
@@ -79,7 +73,7 @@ System.register(["@angular/core", "../models", "../services/listService"], funct
                     var _this = this;
                     this.listService.selectedList.subscribe(function (listItem) {
                         _this.selectedList = listItem;
-                        _this.selectedList && _this.listService.getTaskItems().subscribe(function (taskItemsJson) {
+                        _this.selectedList && _this.listService.getTaskItems(listItem.id).subscribe(function (taskItemsJson) {
                             _this.allTaskItems = models_1.TaskItem.fromJson(taskItemsJson);
                             _this.initTaskItems();
                         });
@@ -93,7 +87,7 @@ System.register(["@angular/core", "../models", "../services/listService"], funct
                     __metadata('design:paramtypes', [listService_1.ListService])
                 ], Tasks);
                 return Tasks;
-            }());
+            })();
             exports_1("Tasks", Tasks);
         }
     }

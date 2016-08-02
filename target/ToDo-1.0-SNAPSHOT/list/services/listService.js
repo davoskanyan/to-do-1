@@ -1,6 +1,4 @@
-System.register(["@angular/core", "rxjs/Rx", "@angular/http"], function(exports_1, context_1) {
-    "use strict";
-    var __moduleName = context_1 && context_1.id;
+System.register(["@angular/core", "rxjs/Rx", "@angular/http"], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -27,8 +25,8 @@ System.register(["@angular/core", "rxjs/Rx", "@angular/http"], function(exports_
             ListService = (function () {
                 function ListService(http) {
                     this.http = http;
-                    this.listUrl = './list/repository/lists.json';
-                    this.taskItemsUrl = './list/repository/taskItems.json';
+                    this.listUrl = '/lists';
+                    this.taskItemsUrl = './tasks';
                     this.selectedList = new Rx_1.BehaviorSubject(null);
                 }
                 ListService.prototype.setSelectedList = function (listItem) {
@@ -37,15 +35,15 @@ System.register(["@angular/core", "rxjs/Rx", "@angular/http"], function(exports_
                 ListService.prototype.getLists = function () {
                     return this.http.get(this.listUrl).map(function (response) { return response.text(); });
                 };
-                ListService.prototype.getTaskItems = function () {
-                    return this.http.get(this.taskItemsUrl).map(function (response) { return response.text(); });
+                ListService.prototype.getTaskItems = function (selectedListId) {
+                    return this.http.get(this.taskItemsUrl + "/" + selectedListId).map(function (response) { return response.text(); });
                 };
                 ListService = __decorate([
                     core_1.Injectable(), 
                     __metadata('design:paramtypes', [http_1.Http])
                 ], ListService);
                 return ListService;
-            }());
+            })();
             exports_1("ListService", ListService);
         }
     }

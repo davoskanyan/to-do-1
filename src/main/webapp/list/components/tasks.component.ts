@@ -8,26 +8,24 @@ import {ListService} from "../services/listService";
 	templateUrl: './list/components/tasks.html'
 })
 export class Tasks implements OnInit {
-	constructor(private listService: ListService) {}
+	constructor(private listService:ListService) {
+	}
 
 	selectedList:ListItem;
 
 	completedTaskItems:Array<TaskItem> = [];
 	notCompletedTaskItems:Array<TaskItem> = [];
 
-	allTaskItems:any = {};
+	allTaskItems:TaskItem[] = [];
 
 	initTaskItems() {
 		this.completedTaskItems = [];
 		this.notCompletedTaskItems = [];
-		if (!this.allTaskItems[this.selectedList.id]) {
-			this.allTaskItems[this.selectedList.id] = {
-				name: this.selectedList.name,
-				tasks: []
-			};
+		if (!this.allTaskItems) {
+			this.allTaskItems = [];
 		}
 		else {
-			for (let taskItem of this.allTaskItems[this.selectedList.id].tasks) {
+			for (let taskItem of this.allTaskItems) {
 				if (taskItem.completed == true) {
 					this.completedTaskItems.push(taskItem);
 				}
@@ -45,10 +43,9 @@ export class Tasks implements OnInit {
 		if (newTaskElement.value.replace(/\s/g, '') == "") {
 			return;
 		}
-		let currentTaskItems:TaskItem[] = this.allTaskItems[this.selectedList.id].tasks;
-		let nextId:number = this.getNextId(currentTaskItems);
+		let nextId:number = this.getNextId(this.allTaskItems);
 		let newTaskItem:TaskItem = new TaskItem(newTaskElement.value, false, nextId);
-		currentTaskItems.push(newTaskItem);
+		this.allTaskItems.push(newTaskItem);
 		newTaskElement.value = "";
 		this.initTaskItems();
 	}
@@ -66,7 +63,7 @@ export class Tasks implements OnInit {
 	ngOnInit() {
 		this.listService.selectedList.subscribe((listItem:ListItem) => {
 			this.selectedList = listItem;
-			this.selectedList && this.listService.getTaskItems().subscribe((taskItemsJson: string) => {
+			this.selectedList && this.listService.getTaskItems(listItem.id).subscribe((taskItemsJson:string) => {
 				this.allTaskItems = TaskItem.fromJson(taskItemsJson);
 				this.initTaskItems();
 			});
