@@ -19,7 +19,7 @@ public class DataConfig {
             .addScript("schema.sql")
             .build();
   }
-  
+
   @Bean
   public JdbcOperations jdbcTemplate(DataSource dataSource) {
     return new JdbcTemplate(dataSource);

@@ -1,0 +1,61 @@
+{
+  "0": {
+	"name": "Works",
+	"tasks": [
+	  {
+		"id": 0,
+		"name": "Typescript",
+		"completed": false
+	  },
+	  {
+		"id": 0,
+		"name": "Angular",
+		"completed": true
+	  },
+	  {
+		"id": 1,
+		"name": "MDL",
+		"completed": false
+	  },
+	  {
+		"id": 2,
+		"name": "Collections",
+		"completed": true
+	  }
+	]
+  },
+  "1": {
+	"name": "Lessons",
+	"tasks": [
+	  {
+		"id": 0,
+		"name": "Discrete Math",
+		"completed": true
+	  },
+	  {
+		"id": 1,
+		"name": "Functional Programming",
+		"completed": true
+	  }
+	]
+  },
+  "2": {
+	"name": "Games",
+	"tasks": []
+  },
+  "3": {
+	"name": "Movies",
+	"tasks": [
+	  {
+		"id": 0,
+		"name": "Everest",
+		"completed": true
+	  },
+	  {
+		"id": 2,
+		"name": "Pawn Sacrifice",
+		"completed": false
+	  }
+	]
+  }
+}
