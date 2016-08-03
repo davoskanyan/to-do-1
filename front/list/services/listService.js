@@ -26,33 +26,28 @@ System.register(["@angular/core", "rxjs/Rx", "@angular/http"], function(exports_
                 function ListService(http) {
                     this.http = http;
                     this.basePath = "http://localhost:8080";
-                    this.listUrl = '/getLists';
-                    this.taskItemsUrl = '/getTasks';
                     this.selectedList = new Rx_1.BehaviorSubject(null);
                 }
                 ListService.prototype.setSelectedList = function (listItem) {
                     this.selectedList.next(listItem);
                 };
-                ListService.prototype.getLists = function () {
-                    return this.http.get(this.basePath + this.listUrl).map(function (response) { return response.text(); });
+                ListService.prototype.getListItems = function () {
+                    return this.http.get(this.basePath + "/getListItems").map(function (response) { return response.text(); });
                 };
-                ListService.prototype.saveList = function (listItemId, taskItems) {
-                    var data = {
-                        listItemId: listItemId,
-                        taskItems: taskItems
-                    };
-                    this.http.post(this.basePath + "/saveList", JSON.stringify(data)).subscribe(function (data) {
-                        console.log(data);
-                    });
+                ListService.prototype.getTaskItems = function (selectedListId) {
+                    return this.http.get(this.basePath + "/getTaskItems/" + selectedListId).map(function (response) { return response.text(); });
+                };
+                ListService.prototype.saveEditListItem = function (listItem) {
+                    var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+                    var options = new http_1.RequestOptions({ headers: headers });
+                    var data = JSON.stringify(listItem);
+                    return this.http.post(this.basePath + "/saveEditListItem", data, options).map(function (response) { return response.text(); });
                 };
                 ListService.prototype.saveEditTaskItem = function (taskItem) {
                     var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
                     var options = new http_1.RequestOptions({ headers: headers });
                     var data = JSON.stringify(taskItem);
                     return this.http.post(this.basePath + "/saveEditTaskItem", data, options).map(function (response) { return response.text(); });
-                };
-                ListService.prototype.getTaskItems = function (selectedListId) {
-                    return this.http.get(this.basePath + this.taskItemsUrl + "/" + selectedListId).map(function (response) { return response.text(); });
                 };
                 ListService = __decorate([
                     core_1.Injectable(), 

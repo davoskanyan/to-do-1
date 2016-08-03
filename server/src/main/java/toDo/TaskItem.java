@@ -10,7 +10,8 @@ public class TaskItem {
 	private String name;
 	private boolean completed;
 
-	public TaskItem() {}
+	public TaskItem() {
+	}
 
 	public TaskItem(Integer id, int listItemId, String name, boolean completed) {
 		this.id = id;

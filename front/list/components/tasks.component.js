@@ -43,15 +43,6 @@ System.register(["@angular/core", "../models", "../services/listService"], funct
                         newTaskElement.value = "";
                     });
                 };
-                Tasks.prototype.getNextId = function (taskItems) {
-                    var maxId = 0;
-                    taskItems.forEach(function (taskItem) {
-                        if (taskItem.id > maxId) {
-                            maxId = taskItem.id;
-                        }
-                    });
-                    return ++maxId;
-                };
                 Tasks.prototype.ngOnInit = function () {
                     var _this = this;
                     this.listService.selectedList.subscribe(function (listItem) {

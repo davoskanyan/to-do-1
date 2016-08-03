@@ -24,20 +24,12 @@ export class Lists {
 		if (newListElement.value.replace(/\s/g, '') == "") {
 			return;
 		}
-		let newId:number = this.getNextId();
-		let newListItem:ListItem = new ListItem(newListElement.value, newId);
-		this.listItems.push(newListItem);
-		newListElement.value = "";
-	}
-
-	getNextId() {
-		let maxId:number = 0;
-		this.listItems.forEach((listItem) => {
-			if (listItem.id > maxId) {
-				maxId = listItem.id;
-			}
+		let newListItem:ListItem = new ListItem(newListElement.value, null);
+		this.listService.saveEditListItem(newListItem).subscribe((newListId:string) => {
+			newListItem.id = parseInt(newListId);
+			this.listItems.push(newListItem);
+			newListElement.value = "";
 		});
-		return ++maxId;
 	}
 
 }

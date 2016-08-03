@@ -32,13 +32,16 @@ System.register(["@angular/core", "../models", "../services/listService"], funct
                     this.clickEvent.emit(listItem);
                 };
                 Lists.prototype.addNewList = function (newListElement) {
+                    var _this = this;
                     if (newListElement.value.replace(/\s/g, '') == "") {
                         return;
                     }
-                    var newId = this.getNextId();
-                    var newListItem = new models_1.ListItem(newListElement.value, newId);
-                    this.listItems.push(newListItem);
-                    newListElement.value = "";
+                    var newListItem = new models_1.ListItem(newListElement.value, null);
+                    this.listService.saveEditListItem(newListItem).subscribe(function (newListId) {
+                        newListItem.id = parseInt(newListId);
+                        _this.listItems.push(newListItem);
+                        newListElement.value = "";
+                    });
                 };
                 Lists.prototype.getNextId = function () {
                     var maxId = 0;

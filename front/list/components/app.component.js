@@ -44,7 +44,7 @@ System.register(["@angular/core", "@angular/platform-browser-dynamic", "./tasks.
                 }
                 ListApp.prototype.ngOnInit = function () {
                     var _this = this;
-                    this.listService.getLists().subscribe(function (responseJson) {
+                    this.listService.getListItems().subscribe(function (responseJson) {
                         _this.listItems = models_1.ListItem.fromJson(responseJson);
                         _this.listService.setSelectedList(_this.listItems[0]);
                     });

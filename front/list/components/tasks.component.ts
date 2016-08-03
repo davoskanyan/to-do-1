@@ -31,16 +31,6 @@ export class Tasks implements OnInit {
 		});
 	}
 
-	getNextId(taskItems:TaskItem[]) {
-		let maxId:number = 0;
-		taskItems.forEach((taskItem) => {
-			if (taskItem.id > maxId) {
-				maxId = taskItem.id;
-			}
-		});
-		return ++maxId;
-	}
-
 	ngOnInit() {
 		this.listService.selectedList.subscribe((listItem:ListItem) => {
 			this.selectedList = listItem;

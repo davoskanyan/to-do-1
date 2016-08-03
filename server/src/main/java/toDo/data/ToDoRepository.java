@@ -65,20 +65,45 @@ public class ToDoRepository {
 	}
 
 	public int saveTaskItem(TaskItem newTaskItem) {
-		int newTaskId = getNextTaskId(newTaskItem.getListItemId());
-		newTaskItem.setId(newTaskId);
+		int newTaskItemId = getNextTaskItemId(newTaskItem.getListItemId());
+		newTaskItem.setId(newTaskItemId);
 		this.taskItems.get(newTaskItem.getListItemId()).add(newTaskItem);
-		return newTaskId;
+		return newTaskItemId;
 	}
 
-	private int getNextTaskId(int listItemId) {
+	public void editListItem(ListItem changedListItem) {
+		for(ListItem listItem : listItems) {
+			if(listItem.getId().equals(changedListItem.getId())) {
+				listItem.setName(changedListItem.getName());
+			}
+		}
+	}
+
+	public int saveListItem(ListItem newListItem) {
+		int newListItemId = getNextListItemId();
+		newListItem.setId(newListItemId);
+		this.listItems.add(newListItem);
+		this.taskItems.put(newListItemId, new ArrayList<TaskItem>());
+		return newListItemId;
+	}
+
+	private int getNextTaskItemId(int listItemId) {
 		int maxId = 0;
 		for (TaskItem taskItem : taskItems.get(listItemId)) {
 			if (taskItem.getId() > maxId) {
 				maxId = taskItem.getId();
 			}
 		}
+		return ++maxId;
+	}
 
+	private int getNextListItemId() {
+		int maxId = 0;
+		for (ListItem listItem: listItems) {
+			if (listItem.getId() > maxId) {
+				maxId = listItem.getId();
+			}
+		}
 		return ++maxId;
 	}
 }

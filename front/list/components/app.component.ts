@@ -22,7 +22,7 @@ class ListApp implements OnInit, OnChanges {
 	selectedList:ListItem;
 
 	ngOnInit():any {
-		this.listService.getLists().subscribe((responseJson:string) => {
+		this.listService.getListItems().subscribe((responseJson:string) => {
 			this.listItems = ListItem.fromJson(responseJson);
 			this.listService.setSelectedList(this.listItems[0]);
 		});

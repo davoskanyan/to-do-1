@@ -5,15 +5,19 @@ package toDo;
  */
 public class ListItem {
 
-	private int id;
+	private Integer id;
 	private String name;
 
-	public ListItem(int id, String name) {
+	public ListItem() {
+
+	}
+
+	public ListItem(Integer id, String name) {
 		this.id = id;
 		this.name = name;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
@@ -21,4 +25,11 @@ public class ListItem {
 		return name;
 	}
 
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 }
