@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {ListItem} from "../models";
 import {Subject, BehaviorSubject, Observable} from "rxjs/Rx";
-import {Response, Http} from "@angular/http";
+import {Response, Http, Headers, RequestOptions} from "@angular/http";
 import {TaskItem} from "../models";
 
 @Injectable()
@@ -11,8 +11,8 @@ export class ListService {
 
 	private basePath:string = "http://localhost:8080";
 
-	private listUrl = '/lists';
-	private taskItemsUrl = '/tasks';
+	private listUrl = '/getLists';
+	private taskItemsUrl = '/getTasks';
 
 	public selectedList:Subject<ListItem> = new BehaviorSubject<ListItem>(null);
 
@@ -34,14 +34,12 @@ export class ListService {
 		});
 	}
 
-	public saveEditTaskItem(listItemId:number, taskItem:TaskItem) {
-		let data = {
-			listItemId: listItemId,
-			taskItem: taskItem
-		};
-		return this.http.post(this.basePath + "/saveEditTaskItem", JSON.stringify(data)).map((response:Response) => {
-			response.text()
-		});
+	public saveEditTaskItem(listItemId:number, taskItem:TaskItem):Observable<String> {
+		let headers = new Headers({ 'Content-Type': 'application/json' });
+		let options = new RequestOptions({ headers: headers });
+		let data = JSON.stringify(taskItem);
+
+		return this.http.post(this.basePath + "/saveEditTaskItem", data, options).map((response:Response) => response.text());
 	}
 
 	public getTaskItems(selectedListId):Observable<String> {

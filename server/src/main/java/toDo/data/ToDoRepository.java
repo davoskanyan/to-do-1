@@ -53,22 +53,21 @@ public class ToDoRepository {
 		return taskItems.get(listId);
 	}
 
-	public void editTaskItem(int changedTaskItemId, int listItemId, String changedTaskItemName,
-			boolean changedTaskItemCompleted) {
-		List<TaskItem> taskItems = this.taskItems.get(listItemId);
+	public void editTaskItem(TaskItem changedTaskItem) {
+		List<TaskItem> taskItems = this.taskItems.get(changedTaskItem.getListItemId());
 		for (TaskItem taskItem : taskItems) {
-			if (taskItem.getId() == changedTaskItemId) {
-				taskItem.setCompleted(changedTaskItemCompleted);
-				taskItem.setName(changedTaskItemName);
+			if (taskItem.getId().equals(changedTaskItem.getId())) {
+				taskItem.setCompleted(changedTaskItem.isCompleted());
+				taskItem.setName(changedTaskItem.getName());
 				break;
 			}
 		}
 	}
 
-	public int saveTaskItem(int listItemId, String newTaskItemName) {
-		int newTaskId = getNextTaskId(listItemId);
-		TaskItem newTaskItem = new TaskItem(newTaskId, listItemId, newTaskItemName, false);
-		this.taskItems.get(listItemId).add(newTaskItem);
+	public int saveTaskItem(TaskItem newTaskItem) {
+		int newTaskId = getNextTaskId(newTaskItem.getListItemId());
+		newTaskItem.setId(newTaskId);
+		this.taskItems.get(newTaskItem.getListItemId()).add(newTaskItem);
 		return newTaskId;
 	}
 

@@ -1,6 +1,6 @@
 export class TaskItem {
 
-	constructor(public name:string, public completed:boolean, public id:number) {
+	constructor(public id:number, public listItemId:number, public name:string, public completed:boolean) {
 	}
 
 	getNextId(listItems:ListItem[]) {
@@ -16,7 +16,7 @@ export class TaskItem {
 	static fromJson(responseJson:string):TaskItem[] {
 		let taskItems:TaskItem[] = [];
 		JSON.parse(responseJson).forEach(node => {
-			taskItems.push(new TaskItem(node.name, node.completed, node.id));
+			taskItems.push(new TaskItem(node.id, node.listItemId, node.name, node.completed));
 		});
 		return taskItems;
 	}

@@ -45,7 +45,7 @@ System.register(["@angular/core", "../models", "../services/listService"], funct
                                 (this.notCompletedTaskItems.push(taskItem));
                         }
                     }
-                    this.listService.saveList(this.selectedList.id, this.allTaskItems);
+                    //this.listService.saveList(this.selectedList.id, this.allTaskItems);
                 };
                 Tasks.prototype.toggleCheck = function (taskItem) {
                     taskItem.completed = !taskItem.completed;
@@ -57,7 +57,7 @@ System.register(["@angular/core", "../models", "../services/listService"], funct
                     if (newTaskElement.value.replace(/\s/g, '') == "") {
                         return;
                     }
-                    var newTaskItem = new models_1.TaskItem(newTaskElement.value, false, null);
+                    var newTaskItem = new models_1.TaskItem(null, this.selectedList.id, newTaskElement.value, false);
                     this.listService.saveEditTaskItem(this.selectedList.id, newTaskItem).subscribe(function (newTaskId) {
                         newTaskItem.id = parseInt(newTaskId);
                         _this.allTaskItems.push(newTaskItem);

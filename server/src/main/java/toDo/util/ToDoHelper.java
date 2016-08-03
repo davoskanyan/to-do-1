@@ -40,6 +40,7 @@ public class ToDoHelper {
 			}
 			jsonString.append("{");
 			jsonString.append("\"id\":").append(taskItem.getId()).append(",");
+			jsonString.append("\"listItemId\":").append("\"").append(taskItem.getListItemId()).append("\"").append(",");
 			jsonString.append("\"name\":").append("\"").append(taskItem.getName()).append("\"").append(",");
 			jsonString.append("\"completed\":").append(taskItem.isCompleted());
 			jsonString.append("}");

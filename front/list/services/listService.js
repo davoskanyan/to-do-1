@@ -26,8 +26,8 @@ System.register(["@angular/core", "rxjs/Rx", "@angular/http"], function(exports_
                 function ListService(http) {
                     this.http = http;
                     this.basePath = "http://localhost:8080";
-                    this.listUrl = '/lists';
-                    this.taskItemsUrl = '/tasks';
+                    this.listUrl = '/getLists';
+                    this.taskItemsUrl = '/getTasks';
                     this.selectedList = new Rx_1.BehaviorSubject(null);
                 }
                 ListService.prototype.setSelectedList = function (listItem) {
@@ -46,13 +46,10 @@ System.register(["@angular/core", "rxjs/Rx", "@angular/http"], function(exports_
                     });
                 };
                 ListService.prototype.saveEditTaskItem = function (listItemId, taskItem) {
-                    var data = {
-                        listItemId: listItemId,
-                        taskItem: taskItem
-                    };
-                    return this.http.post(this.basePath + "/saveEditTaskItem", JSON.stringify(data)).map(function (response) {
-                        response.text();
-                    });
+                    var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+                    var options = new http_1.RequestOptions({ headers: headers });
+                    var data = JSON.stringify(taskItem);
+                    return this.http.post(this.basePath + "/saveEditTaskItem", data, options).map(function (response) { return response.text(); });
                 };
                 ListService.prototype.getTaskItems = function (selectedListId) {
                     return this.http.get(this.basePath + this.taskItemsUrl + "/" + selectedListId).map(function (response) { return response.text(); });

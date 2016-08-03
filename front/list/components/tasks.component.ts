@@ -32,7 +32,7 @@ export class Tasks implements OnInit {
 				else(this.notCompletedTaskItems.push(taskItem));
 			}
 		}
-		this.listService.saveList(this.selectedList.id, this.allTaskItems);
+		//this.listService.saveList(this.selectedList.id, this.allTaskItems);
 	}
 
 	toggleCheck(taskItem:TaskItem) {
@@ -47,7 +47,7 @@ export class Tasks implements OnInit {
 			return;
 		}
 
-		let newTaskItem:TaskItem = new TaskItem(newTaskElement.value, false, null);
+		let newTaskItem:TaskItem = new TaskItem(null, this.selectedList.id, newTaskElement.value, false);
 		this.listService.saveEditTaskItem(this.selectedList.id, newTaskItem).subscribe((newTaskId:string) => {
 			newTaskItem.id = parseInt(newTaskId);
 			this.allTaskItems.push(newTaskItem);

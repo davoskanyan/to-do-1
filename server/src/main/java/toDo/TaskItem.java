@@ -5,24 +5,26 @@ package toDo;
  */
 public class TaskItem {
 
-	private int id;
-	private int listId;
+	private Integer id;
+	private int listItemId;
 	private String name;
 	private boolean completed;
 
-	public TaskItem(int id, int listId, String name, boolean completed) {
+	public TaskItem() {}
+
+	public TaskItem(Integer id, int listItemId, String name, boolean completed) {
 		this.id = id;
-		this.listId = listId;
+		this.listItemId = listItemId;
 		this.name = name;
 		this.completed = completed;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public int getListId() {
-		return listId;
+	public int getListItemId() {
+		return listItemId;
 	}
 
 	public String getName() {
@@ -39,5 +41,13 @@ public class TaskItem {
 
 	public void setCompleted(boolean completed) {
 		this.completed = completed;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public void setListItemId(int listItemId) {
+		this.listItemId = listItemId;
 	}
 }

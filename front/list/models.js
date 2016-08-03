@@ -4,10 +4,11 @@ System.register([], function(exports_1) {
         setters:[],
         execute: function() {
             TaskItem = (function () {
-                function TaskItem(name, completed, id) {
+                function TaskItem(id, listItemId, name, completed) {
+                    this.id = id;
+                    this.listItemId = listItemId;
                     this.name = name;
                     this.completed = completed;
-                    this.id = id;
                 }
                 TaskItem.prototype.getNextId = function (listItems) {
                     var maxId = 0;
@@ -21,7 +22,7 @@ System.register([], function(exports_1) {
                 TaskItem.fromJson = function (responseJson) {
                     var taskItems = [];
                     JSON.parse(responseJson).forEach(function (node) {
-                        taskItems.push(new TaskItem(node.name, node.completed, node.id));
+                        taskItems.push(new TaskItem(node.id, node.listItemId, node.name, node.completed));
                     });
                     return taskItems;
                 };
