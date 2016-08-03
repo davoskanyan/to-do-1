@@ -14,12 +14,13 @@
 	</div>
 	<div id="tasks">
 		<ul>
-			<li *ngFor="let taskItem of notCompletedTaskItems" class="taskItem">
-			<img src="./list/images/X.png" class="delete-task"/>
-				<input type="checkbox" class="task-item-checkbox" (click)="toggleCheck(taskItem)" align="middle"/>
-				<span class="task-item-name">{{taskItem.name}}</span>
-				
-			</li>
+			<div *ngFor="let taskItem of allTaskItems">
+				<li *ngIf="taskItem.completed == false" class="taskItem">
+					<img src="./list/images/X.png" class="delete-task"/>
+					<input type="checkbox" class="task-item-checkbox" (click)="toggleCheck(taskItem)" align="middle"/>
+					<span class="task-item-name">{{taskItem.name}}</span>
+				</li>
+			</div>
 		</ul>
 	</div>
 	<div id="showCompletedTasksContainer">
@@ -27,11 +28,13 @@
 	</div>
 	<div id="completedTasks">
 		<ul>
-			<li *ngFor="let taskItem of completedTaskItems" class="completed taskItem">
-			<img src="./list/images/X.png" class="delete-task" />
-			<input type="checkbox" checked class="task-item-checkbox" (click)="toggleCheck(taskItem)"/>
-				<del class="task-item-name">{{taskItem.name}}</del>
-			</li>
+			<div *ngFor="let taskItem of allTaskItems">
+				<li *ngIf="taskItem.completed == true" class="completed taskItem">
+					<img src="./list/images/X.png" class="delete-task"/>
+					<input type="checkbox" checked class="task-item-checkbox" (click)="toggleCheck(taskItem)"/>
+					<del class="task-item-name">{{taskItem.name}}</del>
+				</li>
+			</div>
 		</ul>
 	</div>
 </div>

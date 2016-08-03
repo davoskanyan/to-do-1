@@ -25,32 +25,11 @@ System.register(["@angular/core", "../models", "../services/listService"], funct
             Tasks = (function () {
                 function Tasks(listService) {
                     this.listService = listService;
-                    this.completedTaskItems = [];
-                    this.notCompletedTaskItems = [];
                     this.allTaskItems = [];
                 }
-                Tasks.prototype.initTaskItems = function () {
-                    this.completedTaskItems = [];
-                    this.notCompletedTaskItems = [];
-                    if (!this.allTaskItems) {
-                        this.allTaskItems = [];
-                    }
-                    else {
-                        for (var _i = 0, _a = this.allTaskItems; _i < _a.length; _i++) {
-                            var taskItem = _a[_i];
-                            if (taskItem.completed == true) {
-                                this.completedTaskItems.push(taskItem);
-                            }
-                            else
-                                (this.notCompletedTaskItems.push(taskItem));
-                        }
-                    }
-                    //this.listService.saveList(this.selectedList.id, this.allTaskItems);
-                };
                 Tasks.prototype.toggleCheck = function (taskItem) {
                     taskItem.completed = !taskItem.completed;
-                    this.listService.saveEditTaskItem(this.selectedList.id, taskItem).subscribe();
-                    this.initTaskItems();
+                    this.listService.saveEditTaskItem(taskItem).subscribe();
                 };
                 Tasks.prototype.addNewTask = function (newTaskElement) {
                     var _this = this;
@@ -58,11 +37,10 @@ System.register(["@angular/core", "../models", "../services/listService"], funct
                         return;
                     }
                     var newTaskItem = new models_1.TaskItem(null, this.selectedList.id, newTaskElement.value, false);
-                    this.listService.saveEditTaskItem(this.selectedList.id, newTaskItem).subscribe(function (newTaskId) {
+                    this.listService.saveEditTaskItem(newTaskItem).subscribe(function (newTaskId) {
                         newTaskItem.id = parseInt(newTaskId);
                         _this.allTaskItems.push(newTaskItem);
                         newTaskElement.value = "";
-                        _this.initTaskItems();
                     });
                 };
                 Tasks.prototype.getNextId = function (taskItems) {
@@ -80,7 +58,6 @@ System.register(["@angular/core", "../models", "../services/listService"], funct
                         _this.selectedList = listItem;
                         _this.selectedList && _this.listService.getTaskItems(listItem.id).subscribe(function (taskItemsJson) {
                             _this.allTaskItems = models_1.TaskItem.fromJson(taskItemsJson);
-                            _this.initTaskItems();
                         });
                     });
                 };

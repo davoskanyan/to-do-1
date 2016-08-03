@@ -34,7 +34,7 @@ export class ListService {
 		});
 	}
 
-	public saveEditTaskItem(listItemId:number, taskItem:TaskItem):Observable<String> {
+	public saveEditTaskItem(taskItem:TaskItem):Observable<String> {
 		let headers = new Headers({ 'Content-Type': 'application/json' });
 		let options = new RequestOptions({ headers: headers });
 		let data = JSON.stringify(taskItem);

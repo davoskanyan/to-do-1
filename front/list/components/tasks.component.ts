@@ -12,47 +12,22 @@ export class Tasks implements OnInit {
 	}
 
 	selectedList:ListItem;
-
-	completedTaskItems:Array<TaskItem> = [];
-	notCompletedTaskItems:Array<TaskItem> = [];
-
 	allTaskItems:TaskItem[] = [];
-
-	initTaskItems() {
-		this.completedTaskItems = [];
-		this.notCompletedTaskItems = [];
-		if (!this.allTaskItems) {
-			this.allTaskItems = [];
-		}
-		else {
-			for (let taskItem of this.allTaskItems) {
-				if (taskItem.completed == true) {
-					this.completedTaskItems.push(taskItem);
-				}
-				else(this.notCompletedTaskItems.push(taskItem));
-			}
-		}
-		//this.listService.saveList(this.selectedList.id, this.allTaskItems);
-	}
 
 	toggleCheck(taskItem:TaskItem) {
 		taskItem.completed = !taskItem.completed;
-		this.listService.saveEditTaskItem(this.selectedList.id, taskItem).subscribe();
-
-		this.initTaskItems();
+		this.listService.saveEditTaskItem(taskItem).subscribe();
 	}
 
 	addNewTask(newTaskElement:HTMLInputElement) {
 		if (newTaskElement.value.replace(/\s/g, '') == "") {
 			return;
 		}
-
 		let newTaskItem:TaskItem = new TaskItem(null, this.selectedList.id, newTaskElement.value, false);
-		this.listService.saveEditTaskItem(this.selectedList.id, newTaskItem).subscribe((newTaskId:string) => {
+		this.listService.saveEditTaskItem(newTaskItem).subscribe((newTaskId:string) => {
 			newTaskItem.id = parseInt(newTaskId);
 			this.allTaskItems.push(newTaskItem);
 			newTaskElement.value = "";
-			this.initTaskItems();
 		});
 	}
 
@@ -71,7 +46,6 @@ export class Tasks implements OnInit {
 			this.selectedList = listItem;
 			this.selectedList && this.listService.getTaskItems(listItem.id).subscribe((taskItemsJson:string) => {
 				this.allTaskItems = TaskItem.fromJson(taskItemsJson);
-				this.initTaskItems();
 			});
 		});
 	}

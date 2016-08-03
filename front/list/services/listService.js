@@ -45,7 +45,7 @@ System.register(["@angular/core", "rxjs/Rx", "@angular/http"], function(exports_
                         console.log(data);
                     });
                 };
-                ListService.prototype.saveEditTaskItem = function (listItemId, taskItem) {
+                ListService.prototype.saveEditTaskItem = function (taskItem) {
                     var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
                     var options = new http_1.RequestOptions({ headers: headers });
                     var data = JSON.stringify(taskItem);
