@@ -25,11 +25,9 @@ System.register(["@angular/core", "../models", "../services/listService"], funct
             Lists = (function () {
                 function Lists(listService) {
                     this.listService = listService;
-                    this.clickEvent = new core_1.EventEmitter(null);
                 }
                 Lists.prototype.onListItemClick = function (listItem) {
                     this.listService.setSelectedList(listItem);
-                    this.clickEvent.emit(listItem);
                 };
                 Lists.prototype.addNewList = function (newListElement) {
                     var _this = this;
@@ -43,27 +41,16 @@ System.register(["@angular/core", "../models", "../services/listService"], funct
                         newListElement.value = "";
                     });
                 };
-                Lists.prototype.getNextId = function () {
-                    var maxId = 0;
-                    this.listItems.forEach(function (listItem) {
-                        if (listItem.id > maxId) {
-                            maxId = listItem.id;
-                        }
+                Lists.prototype.ngOnInit = function () {
+                    var _this = this;
+                    this.listService.getListItems().subscribe(function (responseJson) {
+                        _this.listItems = models_1.ListItem.fromJson(responseJson);
+                        _this.listService.setSelectedList(_this.listItems[0]);
                     });
-                    return ++maxId;
+                    this.listService.selectedList.subscribe(function (listItem) {
+                        _this.selectedList = listItem;
+                    });
                 };
-                __decorate([
-                    core_1.Output(), 
-                    __metadata('design:type', core_1.EventEmitter)
-                ], Lists.prototype, "clickEvent", void 0);
-                __decorate([
-                    core_1.Input(), 
-                    __metadata('design:type', Array)
-                ], Lists.prototype, "listItems", void 0);
-                __decorate([
-                    core_1.Input(), 
-                    __metadata('design:type', models_1.ListItem)
-                ], Lists.prototype, "selectedList", void 0);
                 Lists = __decorate([
                     core_1.Component({
                         selector: 'lists',

@@ -14,32 +14,9 @@ import {HTTP_PROVIDERS} from "@angular/http";
 	directives: [Lists, Tasks, UserInfo],
 	providers: [ListService, HTTP_PROVIDERS]
 })
-class ListApp implements OnInit, OnChanges {
-	constructor(private listService: ListService) {
+class ListApp {
+	constructor() {
 	}
-
-	listItems:ListItem[] = [];
-	selectedList:ListItem;
-
-	ngOnInit():any {
-		this.listService.getListItems().subscribe((responseJson:string) => {
-			this.listItems = ListItem.fromJson(responseJson);
-			this.listService.setSelectedList(this.listItems[0]);
-		});
-		this.listService.selectedList.subscribe((listItem:ListItem) => {
-			this.selectedList = listItem;
-			this.ngOnChanges();
-		});
-	}
-
-	ngOnChanges() {
-		
-	}
-
-	listChanged(selectedList:ListItem) {
-		this.listService.setSelectedList(selectedList);
-	}
-
 }
 
 bootstrap(ListApp);
