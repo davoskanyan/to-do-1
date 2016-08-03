@@ -12,7 +12,7 @@ export class Tasks implements OnInit {
 	}
 
 	selectedList:ListItem;
-	allTaskItems:TaskItem[] = [];
+	taskItems:TaskItem[] = [];
 
 	toggleCheck(taskItem:TaskItem) {
 		taskItem.completed = !taskItem.completed;
@@ -26,17 +26,27 @@ export class Tasks implements OnInit {
 		let newTaskItem:TaskItem = new TaskItem(null, this.selectedList.id, newTaskElement.value, false);
 		this.listService.saveEditTaskItem(newTaskItem).subscribe((newTaskId:string) => {
 			newTaskItem.id = parseInt(newTaskId);
-			this.allTaskItems.push(newTaskItem);
+			this.taskItems.push(newTaskItem);
 			newTaskElement.value = "";
 		});
+	}
+
+	onRemoveTaskItemClick(taskItem:TaskItem) {
+		this.taskItems = this.taskItems.filter((t:TaskItem) => t.id != taskItem.id);
+		this.listService.removeTaskItem(taskItem);
 	}
 
 	ngOnInit() {
 		this.listService.selectedList.subscribe((listItem:ListItem) => {
 			this.selectedList = listItem;
-			this.selectedList && this.listService.getTaskItems(listItem.id).subscribe((taskItemsJson:string) => {
-				this.allTaskItems = TaskItem.fromJson(taskItemsJson);
-			});
+			if (listItem == null) {
+				this.taskItems = [];
+			}
+			else {
+				this.listService.getTaskItems(listItem.id).subscribe((taskItemsJson:string) => {
+					this.taskItems = TaskItem.fromJson(taskItemsJson);
+				});
+			}
 		});
 	}
 }

@@ -3,6 +3,7 @@ package toDo.web;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
@@ -34,7 +35,8 @@ public class WebConfig
 
 	@Override
 	public void addCorsMappings(CorsRegistry registry) {
-		registry.addMapping("/**");
+		registry.addMapping("/**").allowedMethods(RequestMethod.GET.toString(), RequestMethod.POST.toString(),
+				RequestMethod.DELETE.toString());
 	}
 
 }

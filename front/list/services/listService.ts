@@ -26,20 +26,26 @@ export class ListService {
 	}
 
 	public saveEditListItem(listItem:ListItem) {
-		let headers = new Headers({ 'Content-Type': 'application/json' });
-		let options = new RequestOptions({ headers: headers });
+		let headers = new Headers({'Content-Type': 'application/json'});
+		let options = new RequestOptions({headers: headers});
 		let data = JSON.stringify(listItem);
 
 		return this.http.post(this.basePath + "/saveEditListItem", data, options).map((response:Response) => response.text());
 	}
 
 	public saveEditTaskItem(taskItem:TaskItem):Observable<String> {
-		let headers = new Headers({ 'Content-Type': 'application/json' });
-		let options = new RequestOptions({ headers: headers });
+		let headers = new Headers({'Content-Type': 'application/json'});
+		let options = new RequestOptions({headers: headers});
 		let data = JSON.stringify(taskItem);
 
 		return this.http.post(this.basePath + "/saveEditTaskItem", data, options).map((response:Response) => response.text());
 	}
 
+	public removeListItem(listItemId:number) {
+		this.http.delete(this.basePath + "/deleteListItem/" + listItemId).subscribe();
+	}
 
+	public removeTaskItem(taskItem:TaskItem) {
+		this.http.delete(this.basePath + "/deleteTaskItem/" + taskItem.listItemId + "/" + taskItem.id).subscribe();
+	}
 }

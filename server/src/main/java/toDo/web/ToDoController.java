@@ -60,7 +60,7 @@ public class ToDoController {
 	}
 
 	@RequestMapping(value = "/saveEditTaskItem", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public void saveTaskItem(@RequestBody TaskItem taskItem, HttpServletResponse response)
+	public void saveEditTaskItem(@RequestBody TaskItem taskItem, HttpServletResponse response)
 			throws IOException {
 
 		if (taskItem.getId() == null) {
@@ -70,5 +70,18 @@ public class ToDoController {
 		else {
 			this.toDoRepository.editTaskItem(taskItem);
 		}
+	}
+
+	@RequestMapping(value = "/deleteListItem/{listItemId}", method = RequestMethod.DELETE)
+	public void deleteListItem(@PathVariable("listItemId") int listItemId, HttpServletResponse response)
+			throws IOException {
+		this.toDoRepository.deleteListItem(listItemId);
+	}
+
+	@RequestMapping(value = "/deleteTaskItem/{listItemId}/{taskItemId}", method = RequestMethod.DELETE)
+	public void deleteTaskItem(@PathVariable("taskItemId") int taskItemId, @PathVariable("listItemId") int listItemId,
+			HttpServletResponse response)
+			throws IOException {
+		this.toDoRepository.deleteTaskItem(listItemId, taskItemId);
 	}
 }

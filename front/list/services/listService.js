@@ -49,6 +49,12 @@ System.register(["@angular/core", "rxjs/Rx", "@angular/http"], function(exports_
                     var data = JSON.stringify(taskItem);
                     return this.http.post(this.basePath + "/saveEditTaskItem", data, options).map(function (response) { return response.text(); });
                 };
+                ListService.prototype.removeListItem = function (listItemId) {
+                    this.http.delete(this.basePath + "/deleteListItem/" + listItemId).subscribe();
+                };
+                ListService.prototype.removeTaskItem = function (taskItem) {
+                    this.http.delete(this.basePath + "/deleteTaskItem/" + taskItem.listItemId + "/" + taskItem.id).subscribe();
+                };
                 ListService = __decorate([
                     core_1.Injectable(), 
                     __metadata('design:paramtypes', [http_1.Http])

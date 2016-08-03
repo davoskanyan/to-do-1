@@ -29,6 +29,13 @@ System.register(["@angular/core", "../models", "../services/listService"], funct
                 Lists.prototype.onListItemClick = function (listItem) {
                     this.listService.setSelectedList(listItem);
                 };
+                Lists.prototype.onRemoveListItemClick = function (listItemId) {
+                    if (this.selectedList.id == listItemId) {
+                        this.listService.setSelectedList(null);
+                    }
+                    this.listItems = this.listItems.filter(function (listItem) { return listItem.id != listItemId; });
+                    this.listService.removeListItem(listItemId);
+                };
                 Lists.prototype.addNewList = function (newListElement) {
                     var _this = this;
                     if (newListElement.value.replace(/\s/g, '') == "") {

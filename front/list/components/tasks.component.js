@@ -25,7 +25,7 @@ System.register(["@angular/core", "../models", "../services/listService"], funct
             Tasks = (function () {
                 function Tasks(listService) {
                     this.listService = listService;
-                    this.allTaskItems = [];
+                    this.taskItems = [];
                 }
                 Tasks.prototype.toggleCheck = function (taskItem) {
                     taskItem.completed = !taskItem.completed;
@@ -39,17 +39,26 @@ System.register(["@angular/core", "../models", "../services/listService"], funct
                     var newTaskItem = new models_1.TaskItem(null, this.selectedList.id, newTaskElement.value, false);
                     this.listService.saveEditTaskItem(newTaskItem).subscribe(function (newTaskId) {
                         newTaskItem.id = parseInt(newTaskId);
-                        _this.allTaskItems.push(newTaskItem);
+                        _this.taskItems.push(newTaskItem);
                         newTaskElement.value = "";
                     });
+                };
+                Tasks.prototype.onRemoveTaskItemClick = function (taskItem) {
+                    this.taskItems = this.taskItems.filter(function (t) { return t.id != taskItem.id; });
+                    this.listService.removeTaskItem(taskItem);
                 };
                 Tasks.prototype.ngOnInit = function () {
                     var _this = this;
                     this.listService.selectedList.subscribe(function (listItem) {
                         _this.selectedList = listItem;
-                        _this.selectedList && _this.listService.getTaskItems(listItem.id).subscribe(function (taskItemsJson) {
-                            _this.allTaskItems = models_1.TaskItem.fromJson(taskItemsJson);
-                        });
+                        if (listItem == null) {
+                            _this.taskItems = [];
+                        }
+                        else {
+                            _this.listService.getTaskItems(listItem.id).subscribe(function (taskItemsJson) {
+                                _this.taskItems = models_1.TaskItem.fromJson(taskItemsJson);
+                            });
+                        }
                     });
                 };
                 Tasks = __decorate([

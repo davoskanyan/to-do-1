@@ -1,13 +1,8 @@
 package toDo.config;
 
-import javax.servlet.Filter;
-
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-import toDo.web.CORSFilter;
 import toDo.web.WebConfig;
-
 
 public class ToDoWebInitializer
 		extends AbstractAnnotationConfigDispatcherServletInitializer {
@@ -26,10 +21,5 @@ public class ToDoWebInitializer
 	protected String[] getServletMappings() {
 		return new String[] {"/"};
 	}
-
-//	@Override
-//	protected Filter[] getServletFilters() {
-//		return new Filter[] {new CORSFilter()};
-//	}
 
 }

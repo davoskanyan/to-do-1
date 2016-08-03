@@ -9,12 +9,20 @@ import {ListService} from "../services/listService";
 export class Lists implements OnInit {
 	constructor(private listService: ListService) {
 	}
-	
+
 	listItems:ListItem[];
 	selectedList:ListItem;
 
 	onListItemClick(listItem:ListItem):void {
 		this.listService.setSelectedList(listItem);
+	}
+
+	onRemoveListItemClick(listItemId:number):void {
+		if(this.selectedList.id == listItemId) {
+			this.listService.setSelectedList(null);
+		}
+		this.listItems = this.listItems.filter(listItem => listItem.id != listItemId);
+		this.listService.removeListItem(listItemId);
 	}
 
 	addNewList(newListElement:HTMLInputElement) {

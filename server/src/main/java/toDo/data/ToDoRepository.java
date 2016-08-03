@@ -15,8 +15,8 @@ import toDo.TaskItem;
  */
 @Repository
 public class ToDoRepository {
-	private List<ListItem> listItems = new ArrayList<ListItem>();
-	private Map<Integer, List<TaskItem>> taskItems = new HashMap<Integer, List<TaskItem>>();
+	private List<ListItem> listItems = new ArrayList<>();
+	private Map<Integer, List<TaskItem>> taskItems = new HashMap<>();
 
 	public ToDoRepository() {
 		this.listItems.add(new ListItem(0, "Works"));
@@ -24,22 +24,22 @@ public class ToDoRepository {
 		this.listItems.add(new ListItem(2, "Books"));
 		this.listItems.add(new ListItem(3, "Movies"));
 
-		List<TaskItem> taskItems0 = new ArrayList<TaskItem>();
+		List<TaskItem> taskItems0 = new ArrayList<>();
 		taskItems0.add(new TaskItem(0, 0, "Typescript", false));
 		taskItems0.add(new TaskItem(1, 0, "Angular", true));
 		taskItems0.add(new TaskItem(2, 0, "MDL", false));
 		taskItems0.add(new TaskItem(3, 0, "Collections", true));
 		this.taskItems.put(0, taskItems0);
 
-		List<TaskItem> taskItems1 = new ArrayList<TaskItem>();
+		List<TaskItem> taskItems1 = new ArrayList<>();
 		taskItems1.add(new TaskItem(0, 1, "Discrete Math", true));
 		taskItems1.add(new TaskItem(1, 1, "Functional Programming", true));
 		this.taskItems.put(1, taskItems1);
 
-		List<TaskItem> taskItems2 = new ArrayList<TaskItem>();
+		List<TaskItem> taskItems2 = new ArrayList<>();
 		this.taskItems.put(2, taskItems2);
 
-		List<TaskItem> taskItems3 = new ArrayList<TaskItem>();
+		List<TaskItem> taskItems3 = new ArrayList<>();
 		taskItems3.add(new TaskItem(0, 3, "Everest", true));
 		taskItems3.add(new TaskItem(1, 3, "Pawn Sacrifice", false));
 		this.taskItems.put(3, taskItems3);
@@ -72,8 +72,8 @@ public class ToDoRepository {
 	}
 
 	public void editListItem(ListItem changedListItem) {
-		for(ListItem listItem : listItems) {
-			if(listItem.getId().equals(changedListItem.getId())) {
+		for (ListItem listItem : listItems) {
+			if (listItem.getId().equals(changedListItem.getId())) {
 				listItem.setName(changedListItem.getName());
 			}
 		}
@@ -83,8 +83,17 @@ public class ToDoRepository {
 		int newListItemId = getNextListItemId();
 		newListItem.setId(newListItemId);
 		this.listItems.add(newListItem);
-		this.taskItems.put(newListItemId, new ArrayList<TaskItem>());
+		this.taskItems.put(newListItemId, new ArrayList<>());
 		return newListItemId;
+	}
+
+	public void deleteListItem(final int listItemId) {
+		this.listItems.removeIf((listItem) -> listItem.getId().equals(listItemId));
+		this.taskItems.remove(listItemId);
+	}
+
+	public void deleteTaskItem(final int listItemId, final int taskItemId) {
+		this.taskItems.get(listItemId).removeIf((t) -> t.getId().equals(taskItemId));
 	}
 
 	private int getNextTaskItemId(int listItemId) {
@@ -99,7 +108,7 @@ public class ToDoRepository {
 
 	private int getNextListItemId() {
 		int maxId = 0;
-		for (ListItem listItem: listItems) {
+		for (ListItem listItem : listItems) {
 			if (listItem.getId() > maxId) {
 				maxId = listItem.getId();
 			}
