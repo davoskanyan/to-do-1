@@ -5,16 +5,25 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcOperations;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import toDo.ListItem;
 import toDo.TaskItem;
+
+import javax.sql.DataSource;
 
 /**
  * @author David.Voskanyan on 8/2/2016.
  */
 @Repository
 public class ToDoRepository {
+
+	@Autowired
+	private JdbcOperations jdbcOperations;
+
 	private List<ListItem> listItems = new ArrayList<>();
 	private Map<Integer, List<TaskItem>> taskItems = new HashMap<>();
 
@@ -45,11 +54,13 @@ public class ToDoRepository {
 		this.taskItems.put(3, taskItems3);
 	}
 
-	public List<ListItem> getLists() {
+	public List<ListItem> getListItems() {
+		jdbcOperations.update("INSERT INTO ListItem (Id, UserId, Name) " +
+				"VALUES(16, 1, 'added2')");
 		return this.listItems;
 	}
 
-	public List<TaskItem> getTasks(int listId) {
+	public List<TaskItem> getTaskItems(int listId) {
 		return taskItems.get(listId);
 	}
 

@@ -31,7 +31,7 @@ public class ToDoController {
 	public void lists(HttpServletResponse response)
 			throws IOException {
 
-		List<ListItem> lists = toDoRepository.getLists();
+		List<ListItem> lists = toDoRepository.getListItems();
 		String listsJson = ToDoHelper.listsToJson(lists);
 		response.getWriter().write(listsJson);
 	}
@@ -40,7 +40,7 @@ public class ToDoController {
 	public void getTasks(@PathVariable("listId") int listId, HttpServletResponse response)
 			throws IOException {
 
-		List<TaskItem> tasks = toDoRepository.getTasks(listId);
+		List<TaskItem> tasks = toDoRepository.getTaskItems(listId);
 		String tasksJson = ToDoHelper.tasksToJson(tasks);
 		response.getWriter().write(tasksJson);
 	}
