@@ -1,6 +1,6 @@
 import {Component, OnInit} from "@angular/core";
 import {ListItem, TaskItem} from "../models";
-import {AppService} from "../services/listService";
+import {AppService} from "../services/appService";
 
 
 @Component({

@@ -1,4 +1,4 @@
-System.register(["@angular/core", "../models", "../services/listService"], function(exports_1, context_1) {
+System.register(["@angular/core", "../models", "../services/appService"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(["@angular/core", "../models", "../services/listService"], funct
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, models_1, listService_1;
+    var core_1, models_1, appService_1;
     var TaskComponent;
     return {
         setters:[
@@ -20,8 +20,8 @@ System.register(["@angular/core", "../models", "../services/listService"], funct
             function (models_1_1) {
                 models_1 = models_1_1;
             },
-            function (listService_1_1) {
-                listService_1 = listService_1_1;
+            function (appService_1_1) {
+                appService_1 = appService_1_1;
             }],
         execute: function() {
             TaskComponent = (function () {
@@ -68,7 +68,7 @@ System.register(["@angular/core", "../models", "../services/listService"], funct
                         selector: 'tasks',
                         templateUrl: './app/components/tasks.html'
                     }), 
-                    __metadata('design:paramtypes', [listService_1.AppService])
+                    __metadata('design:paramtypes', [appService_1.AppService])
                 ], TaskComponent);
                 return TaskComponent;
             }());

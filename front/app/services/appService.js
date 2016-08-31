@@ -27,35 +27,47 @@ System.register(["@angular/core", "rxjs/Rx", "@angular/http"], function(exports_
             AppService = (function () {
                 function AppService(http) {
                     this.http = http;
-                    this.basePath = "http://localhost:8080";
                     this.selectedList = new Rx_1.BehaviorSubject(null);
                 }
                 AppService.prototype.setSelectedList = function (listItem) {
                     this.selectedList.next(listItem);
                 };
                 AppService.prototype.getListItems = function () {
-                    return this.http.get(this.basePath + "/getListItems").map(function (response) { return response.text(); });
+                    return this.http.get(AppService.getUrl("/getListItems")).map(function (response) { return response.text(); });
                 };
                 AppService.prototype.getTaskItems = function (selectedListId) {
-                    return this.http.get(this.basePath + "/getTaskItems/" + selectedListId).map(function (response) { return response.text(); });
+                    return this.http.get(AppService.getUrl("/getTaskItems", selectedListId)).map(function (response) { return response.text(); });
                 };
                 AppService.prototype.saveEditListItem = function (listItem) {
                     var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
                     var options = new http_1.RequestOptions({ headers: headers });
                     var data = JSON.stringify(listItem);
-                    return this.http.post(this.basePath + "/saveEditListItem", data, options).map(function (response) { return response.text(); });
+                    return this.http.post(AppService.getUrl("/saveEditListItem"), data, options).map(function (response) { return response.text(); });
                 };
                 AppService.prototype.saveEditTaskItem = function (taskItem) {
                     var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
                     var options = new http_1.RequestOptions({ headers: headers });
                     var data = JSON.stringify(taskItem);
-                    return this.http.post(this.basePath + "/saveEditTaskItem", data, options).map(function (response) { return response.text(); });
+                    return this.http.post(AppService.getUrl("/saveEditTaskItem"), data, options).map(function (response) { return response.text(); });
                 };
                 AppService.prototype.removeListItem = function (listItemId) {
-                    this.http.delete(this.basePath + "/deleteListItem/" + listItemId).subscribe();
+                    this.http.delete(AppService.getUrl("/deleteListItem/", listItemId)).subscribe();
                 };
                 AppService.prototype.removeTaskItem = function (taskItem) {
-                    this.http.delete(this.basePath + "/deleteTaskItem/" + taskItem.listItemId + "/" + taskItem.id).subscribe();
+                    this.http.delete(AppService.getUrl("/deleteTaskItem/", taskItem.listItemId, taskItem.id)).subscribe();
+                };
+                AppService.getUrl = function (absolute) {
+                    var queryParams = [];
+                    for (var _i = 1; _i < arguments.length; _i++) {
+                        queryParams[_i - 1] = arguments[_i];
+                    }
+                    var basePath = "http://localhost:8080";
+                    var url = basePath + absolute;
+                    for (var _a = 0, queryParams_1 = queryParams; _a < queryParams_1.length; _a++) {
+                        var queryParam = queryParams_1[_a];
+                        url += "/" + queryParam;
+                    }
+                    return url;
                 };
                 AppService = __decorate([
                     core_1.Injectable(), 
@@ -67,4 +79,4 @@ System.register(["@angular/core", "rxjs/Rx", "@angular/http"], function(exports_
         }
     }
 });
-//# sourceMappingURL=listService.js.map
+//# sourceMappingURL=appService.js.map

@@ -1,16 +1,13 @@
 import {Injectable} from "@angular/core";
-import {ListItem} from "../models";
+import {ListItem, TaskItem} from "../models";
 import {Subject, BehaviorSubject, Observable} from "rxjs/Rx";
 import {Response, Http, Headers, RequestOptions} from "@angular/http";
-import {TaskItem} from "../models";
 
 @Injectable()
 export class AppService {
 	constructor(private http:Http) {
 	}
-
-	private basePath:string = "http://localhost:8080";
-
+	
 	public selectedList:Subject<ListItem> = new BehaviorSubject<ListItem>(null);
 
 	public setSelectedList(listItem:ListItem):void {
@@ -18,11 +15,11 @@ export class AppService {
 	}
 
 	public getListItems():Observable<String> {
-		return this.http.get(this.basePath + "/getListItems").map((response:Response) => response.text());
+		return this.http.get(AppService.getUrl("/getListItems")).map((response:Response) => response.text());
 	}
 
 	public getTaskItems(selectedListId):Observable<String> {
-		return this.http.get(this.basePath + "/getTaskItems/" + selectedListId).map((response:Response) => response.text());
+		return this.http.get(AppService.getUrl("/getTaskItems", selectedListId)).map((response:Response) => response.text());
 	}
 
 	public saveEditListItem(listItem:ListItem) {
@@ -30,7 +27,7 @@ export class AppService {
 		let options = new RequestOptions({headers: headers});
 		let data = JSON.stringify(listItem);
 
-		return this.http.post(this.basePath + "/saveEditListItem", data, options).map((response:Response) => response.text());
+		return this.http.post(AppService.getUrl("/saveEditListItem"), data, options).map((response:Response) => response.text());
 	}
 
 	public saveEditTaskItem(taskItem:TaskItem):Observable<String> {
@@ -38,14 +35,23 @@ export class AppService {
 		let options = new RequestOptions({headers: headers});
 		let data = JSON.stringify(taskItem);
 
-		return this.http.post(this.basePath + "/saveEditTaskItem", data, options).map((response:Response) => response.text());
+		return this.http.post(AppService.getUrl("/saveEditTaskItem"), data, options).map((response:Response) => response.text());
 	}
 
 	public removeListItem(listItemId:number) {
-		this.http.delete(this.basePath + "/deleteListItem/" + listItemId).subscribe();
+		this.http.delete(AppService.getUrl("/deleteListItem/", listItemId)).subscribe();
 	}
 
 	public removeTaskItem(taskItem:TaskItem) {
-		this.http.delete(this.basePath + "/deleteTaskItem/" + taskItem.listItemId + "/" + taskItem.id).subscribe();
+		this.http.delete(AppService.getUrl("/deleteTaskItem/", taskItem.listItemId, taskItem.id)).subscribe();
+	}
+
+	public static getUrl(absolute:string, ...queryParams:Array<string|number>) {
+		let basePath:string = "http://localhost:8080";
+		let url = basePath + absolute;
+		for (let queryParam of queryParams) {
+			url += "/" + queryParam;
+		}
+		return url;
 	}
 }

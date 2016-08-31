@@ -1,6 +1,6 @@
-import {Component, Output, EventEmitter, Input, OnInit} from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 import {ListItem} from "../models";
-import {AppService} from "../services/listService";
+import {AppService} from "../services/appService";
 
 @Component({
 	selector: 'lists',

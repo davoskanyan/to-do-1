@@ -1,4 +1,4 @@
-System.register(["./components/tasks.component", "./components/lists.component", "@angular/platform-browser", "@angular/core", "./services/listService", "./components/app.component", "@angular/http"], function(exports_1, context_1) {
+System.register(["./components/tasks.component", "./components/lists.component", "@angular/platform-browser", "@angular/core", "./services/appService", "./components/app.component", "@angular/http"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(["./components/tasks.component", "./components/lists.component",
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var tasks_component_1, lists_component_1, platform_browser_1, core_1, listService_1, app_component_1, http_1;
+    var tasks_component_1, lists_component_1, platform_browser_1, core_1, appService_1, app_component_1, http_1;
     var AppModule;
     return {
         setters:[
@@ -26,8 +26,8 @@ System.register(["./components/tasks.component", "./components/lists.component",
             function (core_1_1) {
                 core_1 = core_1_1;
             },
-            function (listService_1_1) {
-                listService_1 = listService_1_1;
+            function (appService_1_1) {
+                appService_1 = appService_1_1;
             },
             function (app_component_1_1) {
                 app_component_1 = app_component_1_1;
@@ -43,7 +43,7 @@ System.register(["./components/tasks.component", "./components/lists.component",
                     core_1.NgModule({
                         imports: [platform_browser_1.BrowserModule, http_1.HttpModule],
                         declarations: [app_component_1.AppComponent, lists_component_1.ListComponent, tasks_component_1.TaskComponent],
-                        providers: [listService_1.AppService],
+                        providers: [appService_1.AppService],
                         bootstrap: [app_component_1.AppComponent]
                     }), 
                     __metadata('design:paramtypes', [])
