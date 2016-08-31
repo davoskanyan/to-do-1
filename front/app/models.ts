@@ -1,5 +1,5 @@
 export class TaskItem {
-
+	
 	constructor(public id:number, public listItemId:number, public name:string, public completed:boolean) {
 	}
 

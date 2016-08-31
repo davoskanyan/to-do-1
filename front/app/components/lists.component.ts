@@ -1,13 +1,13 @@
 import {Component, Output, EventEmitter, Input, OnInit} from "@angular/core";
 import {ListItem} from "../models";
-import {ListService} from "../services/listService";
+import {AppService} from "../services/listService";
 
 @Component({
 	selector: 'lists',
-	templateUrl: './list/components/lists.html',
+	templateUrl: './app/components/lists.html',
 })
-export class Lists implements OnInit {
-	constructor(private listService: ListService) {
+export class ListComponent implements OnInit {
+	constructor(private listService: AppService) {
 	}
 
 	listItems:ListItem[];

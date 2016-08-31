@@ -1,14 +1,14 @@
-import {Component, Input, OnChanges, OnInit} from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 import {ListItem, TaskItem} from "../models";
-import {ListService} from "../services/listService";
+import {AppService} from "../services/listService";
 
 
 @Component({
 	selector: 'tasks',
-	templateUrl: './list/components/tasks.html'
+	templateUrl: './app/components/tasks.html'
 })
-export class Tasks implements OnInit {
-	constructor(private listService:ListService) {
+export class TaskComponent implements OnInit {
+	constructor(private listService:AppService) {
 	}
 
 	selectedList:ListItem;

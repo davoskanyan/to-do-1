@@ -5,7 +5,7 @@ import {Response, Http, Headers, RequestOptions} from "@angular/http";
 import {TaskItem} from "../models";
 
 @Injectable()
-export class ListService {
+export class AppService {
 	constructor(private http:Http) {
 	}
 

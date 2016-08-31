@@ -5,7 +5,7 @@
 	<div id="newTaskContainer">
 		<div class="plus-container">
 			<a href="javascript:void(0)" (click)="addNewTask(newTask)">
-				<img src="./list/images/plus.png" class="list-item-image"/>
+				<img src="./app/images/plus.png" class="list-item-image"/>
 			</a>
 		</div>
 		<div class="input-container">
@@ -16,7 +16,7 @@
 		<ul>
 			<div *ngFor="let taskItem of taskItems">
 				<li *ngIf="taskItem.completed == false" class="taskItem">
-					<img src="./list/images/X.png" class="delete-task" (click)="onRemoveTaskItemClick(taskItem)"/>
+					<img src="./app/images/X.png" class="delete-task" (click)="onRemoveTaskItemClick(taskItem)"/>
 					<input type="checkbox" class="task-item-checkbox" (click)="toggleCheck(taskItem)" align="middle"/>
 					<span class="task-item-name">{{taskItem.name}}</span>
 				</li>
@@ -30,7 +30,7 @@
 		<ul>
 			<div *ngFor="let taskItem of taskItems">
 				<li *ngIf="taskItem.completed == true" class="completed taskItem">
-					<img src="./list/images/X.png" class="delete-task" (click)="onRemoveTaskItemClick(taskItem)"/>
+					<img src="./app/images/X.png" class="delete-task" (click)="onRemoveTaskItemClick(taskItem)"/>
 					<input type="checkbox" checked class="task-item-checkbox" (click)="toggleCheck(taskItem)"/>
 					<del class="task-item-name">{{taskItem.name}}</del>
 				</li>

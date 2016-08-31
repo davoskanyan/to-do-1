@@ -2,9 +2,9 @@ import {Component} from "@angular/core";
 
 @Component({
 	selector: 'user-info',
-	templateUrl: './list/components/userInfo.html'
+	templateUrl: './app/components/userInfo.html'
 })
 export class UserInfo {
-	avatarImageUrl: string = "./list/images/avatar.jpg";
+	avatarImageUrl: string = "./app/images/avatar.jpg";
 	name: string = "Voskanyan David";
 }

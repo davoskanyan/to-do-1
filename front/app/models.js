@@ -1,4 +1,6 @@
-System.register([], function(exports_1) {
+System.register([], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
     var TaskItem, ListItem;
     return {
         setters:[],
@@ -27,7 +29,7 @@ System.register([], function(exports_1) {
                     return taskItems;
                 };
                 return TaskItem;
-            })();
+            }());
             exports_1("TaskItem", TaskItem);
             ListItem = (function () {
                 function ListItem(name, id) {
@@ -42,7 +44,7 @@ System.register([], function(exports_1) {
                     return listItems;
                 };
                 return ListItem;
-            })();
+            }());
             exports_1("ListItem", ListItem);
         }
     }

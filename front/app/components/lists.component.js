@@ -1,4 +1,6 @@
-System.register(["@angular/core", "../models", "../services/listService"], function(exports_1) {
+System.register(["@angular/core", "../models", "../services/listService"], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -9,7 +11,7 @@ System.register(["@angular/core", "../models", "../services/listService"], funct
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var core_1, models_1, listService_1;
-    var Lists;
+    var ListComponent;
     return {
         setters:[
             function (core_1_1) {
@@ -22,21 +24,21 @@ System.register(["@angular/core", "../models", "../services/listService"], funct
                 listService_1 = listService_1_1;
             }],
         execute: function() {
-            Lists = (function () {
-                function Lists(listService) {
+            ListComponent = (function () {
+                function ListComponent(listService) {
                     this.listService = listService;
                 }
-                Lists.prototype.onListItemClick = function (listItem) {
+                ListComponent.prototype.onListItemClick = function (listItem) {
                     this.listService.setSelectedList(listItem);
                 };
-                Lists.prototype.onRemoveListItemClick = function (listItemId) {
+                ListComponent.prototype.onRemoveListItemClick = function (listItemId) {
                     if (this.selectedList.id == listItemId) {
                         this.listService.setSelectedList(null);
                     }
                     this.listItems = this.listItems.filter(function (listItem) { return listItem.id != listItemId; });
                     this.listService.removeListItem(listItemId);
                 };
-                Lists.prototype.addNewList = function (newListElement) {
+                ListComponent.prototype.addNewList = function (newListElement) {
                     var _this = this;
                     if (newListElement.value.replace(/\s/g, '') == "") {
                         return;
@@ -48,7 +50,7 @@ System.register(["@angular/core", "../models", "../services/listService"], funct
                         newListElement.value = "";
                     });
                 };
-                Lists.prototype.ngOnInit = function () {
+                ListComponent.prototype.ngOnInit = function () {
                     var _this = this;
                     this.listService.getListItems().subscribe(function (responseJson) {
                         _this.listItems = models_1.ListItem.fromJson(responseJson);
@@ -58,16 +60,16 @@ System.register(["@angular/core", "../models", "../services/listService"], funct
                         _this.selectedList = listItem;
                     });
                 };
-                Lists = __decorate([
+                ListComponent = __decorate([
                     core_1.Component({
                         selector: 'lists',
-                        templateUrl: './list/components/lists.html',
+                        templateUrl: './app/components/lists.html',
                     }), 
-                    __metadata('design:paramtypes', [listService_1.ListService])
-                ], Lists);
-                return Lists;
-            })();
-            exports_1("Lists", Lists);
+                    __metadata('design:paramtypes', [listService_1.AppService])
+                ], ListComponent);
+                return ListComponent;
+            }());
+            exports_1("ListComponent", ListComponent);
         }
     }
 });

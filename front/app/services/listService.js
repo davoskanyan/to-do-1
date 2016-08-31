@@ -1,4 +1,6 @@
-System.register(["@angular/core", "rxjs/Rx", "@angular/http"], function(exports_1) {
+System.register(["@angular/core", "rxjs/Rx", "@angular/http"], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -9,7 +11,7 @@ System.register(["@angular/core", "rxjs/Rx", "@angular/http"], function(exports_
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var core_1, Rx_1, http_1;
-    var ListService;
+    var AppService;
     return {
         setters:[
             function (core_1_1) {
@@ -22,46 +24,46 @@ System.register(["@angular/core", "rxjs/Rx", "@angular/http"], function(exports_
                 http_1 = http_1_1;
             }],
         execute: function() {
-            ListService = (function () {
-                function ListService(http) {
+            AppService = (function () {
+                function AppService(http) {
                     this.http = http;
                     this.basePath = "http://localhost:8080";
                     this.selectedList = new Rx_1.BehaviorSubject(null);
                 }
-                ListService.prototype.setSelectedList = function (listItem) {
+                AppService.prototype.setSelectedList = function (listItem) {
                     this.selectedList.next(listItem);
                 };
-                ListService.prototype.getListItems = function () {
+                AppService.prototype.getListItems = function () {
                     return this.http.get(this.basePath + "/getListItems").map(function (response) { return response.text(); });
                 };
-                ListService.prototype.getTaskItems = function (selectedListId) {
+                AppService.prototype.getTaskItems = function (selectedListId) {
                     return this.http.get(this.basePath + "/getTaskItems/" + selectedListId).map(function (response) { return response.text(); });
                 };
-                ListService.prototype.saveEditListItem = function (listItem) {
+                AppService.prototype.saveEditListItem = function (listItem) {
                     var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
                     var options = new http_1.RequestOptions({ headers: headers });
                     var data = JSON.stringify(listItem);
                     return this.http.post(this.basePath + "/saveEditListItem", data, options).map(function (response) { return response.text(); });
                 };
-                ListService.prototype.saveEditTaskItem = function (taskItem) {
+                AppService.prototype.saveEditTaskItem = function (taskItem) {
                     var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
                     var options = new http_1.RequestOptions({ headers: headers });
                     var data = JSON.stringify(taskItem);
                     return this.http.post(this.basePath + "/saveEditTaskItem", data, options).map(function (response) { return response.text(); });
                 };
-                ListService.prototype.removeListItem = function (listItemId) {
+                AppService.prototype.removeListItem = function (listItemId) {
                     this.http.delete(this.basePath + "/deleteListItem/" + listItemId).subscribe();
                 };
-                ListService.prototype.removeTaskItem = function (taskItem) {
+                AppService.prototype.removeTaskItem = function (taskItem) {
                     this.http.delete(this.basePath + "/deleteTaskItem/" + taskItem.listItemId + "/" + taskItem.id).subscribe();
                 };
-                ListService = __decorate([
+                AppService = __decorate([
                     core_1.Injectable(), 
                     __metadata('design:paramtypes', [http_1.Http])
-                ], ListService);
-                return ListService;
-            })();
-            exports_1("ListService", ListService);
+                ], AppService);
+                return AppService;
+            }());
+            exports_1("AppService", AppService);
         }
     }
 });

@@ -10,7 +10,7 @@
   // packages tells the System loader how to load when no filename and/or no extension
   var packages = {
     'rxjs': { defaultExtension: 'js' },
-    list: {
+    app: {
       format: 'register',
       defaultExtension: 'js'
     }

@@ -1,4 +1,6 @@
-System.register(["@angular/core"], function(exports_1) {
+System.register(["@angular/core"], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,18 +20,18 @@ System.register(["@angular/core"], function(exports_1) {
         execute: function() {
             UserInfo = (function () {
                 function UserInfo() {
-                    this.avatarImageUrl = "./list/images/avatar.jpg";
+                    this.avatarImageUrl = "./app/images/avatar.jpg";
                     this.name = "Voskanyan David";
                 }
                 UserInfo = __decorate([
                     core_1.Component({
                         selector: 'user-info',
-                        templateUrl: './list/components/userInfo.html'
+                        templateUrl: './app/components/userInfo.html'
                     }), 
                     __metadata('design:paramtypes', [])
                 ], UserInfo);
                 return UserInfo;
-            })();
+            }());
             exports_1("UserInfo", UserInfo);
         }
     }
