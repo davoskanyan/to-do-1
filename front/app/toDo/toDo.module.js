@@ -1,4 +1,4 @@
-System.register(["@angular/platform-browser", "@angular/core", "@angular/http", "./app.routing", "./welcome", "./toDo/toDo.module", "./common/pageNotFound.module"], function(exports_1, context_1) {
+System.register(["@angular/platform-browser", "@angular/core", "@angular/http", "../app.routing", "./components/toDo.component", "./services/appService", "./components/tasks.component", "./components/lists.component"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,8 +10,8 @@ System.register(["@angular/platform-browser", "@angular/core", "@angular/http", 
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var platform_browser_1, core_1, http_1, app_routing_1, welcome_1, toDo_module_1, pageNotFound_module_1;
-    var AppModule;
+    var platform_browser_1, core_1, http_1, app_routing_1, toDo_component_1, appService_1, tasks_component_1, lists_component_1;
+    var ToDoModule;
     return {
         setters:[
             function (platform_browser_1_1) {
@@ -26,32 +26,34 @@ System.register(["@angular/platform-browser", "@angular/core", "@angular/http", 
             function (app_routing_1_1) {
                 app_routing_1 = app_routing_1_1;
             },
-            function (welcome_1_1) {
-                welcome_1 = welcome_1_1;
+            function (toDo_component_1_1) {
+                toDo_component_1 = toDo_component_1_1;
             },
-            function (toDo_module_1_1) {
-                toDo_module_1 = toDo_module_1_1;
+            function (appService_1_1) {
+                appService_1 = appService_1_1;
             },
-            function (pageNotFound_module_1_1) {
-                pageNotFound_module_1 = pageNotFound_module_1_1;
+            function (tasks_component_1_1) {
+                tasks_component_1 = tasks_component_1_1;
+            },
+            function (lists_component_1_1) {
+                lists_component_1 = lists_component_1_1;
             }],
         execute: function() {
-            AppModule = (function () {
-                function AppModule() {
+            ToDoModule = (function () {
+                function ToDoModule() {
                 }
-                AppModule = __decorate([
+                ToDoModule = __decorate([
                     core_1.NgModule({
-                        imports: [platform_browser_1.BrowserModule, http_1.HttpModule, app_routing_1.routing, toDo_module_1.ToDoModule, pageNotFound_module_1.PageNotFoundModule],
-                        declarations: [welcome_1.Welcome],
-                        providers: [app_routing_1.appRoutingProviders],
-                        bootstrap: [welcome_1.Welcome]
+                        imports: [platform_browser_1.BrowserModule, http_1.HttpModule, app_routing_1.routing],
+                        declarations: [toDo_component_1.ToDoComponent, lists_component_1.ListComponent, tasks_component_1.TaskComponent],
+                        providers: [appService_1.AppService]
                     }), 
                     __metadata('design:paramtypes', [])
-                ], AppModule);
-                return AppModule;
+                ], ToDoModule);
+                return ToDoModule;
             }());
-            exports_1("AppModule", AppModule);
+            exports_1("ToDoModule", ToDoModule);
         }
     }
 });
-//# sourceMappingURL=app.module.js.map
+//# sourceMappingURL=toDo.module.js.map

@@ -1,10 +1,11 @@
 import {Component, OnInit} from "@angular/core";
-import {ListItem} from "../models";
 import {AppService} from "../services/appService";
+import {ListItem} from "../models";
+
 
 @Component({
 	selector: 'lists',
-	templateUrl: './app/components/lists.html',
+	templateUrl: 'app/toDo/components/lists.html',
 })
 export class ListComponent implements OnInit {
 	constructor(private listService: AppService) {

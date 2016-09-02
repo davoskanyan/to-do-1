@@ -1,4 +1,4 @@
-System.register(["@angular/core", "./tasks.component", "./lists.component", "./userInfo.component", "../services/appService"], function(exports_1, context_1) {
+System.register(["@angular/core", "./tasks.component", "./lists.component", "./user.component", "../services/appService"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,8 +10,8 @@ System.register(["@angular/core", "./tasks.component", "./lists.component", "./u
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, tasks_component_1, lists_component_1, userInfo_component_1, appService_1;
-    var AppComponent;
+    var core_1, tasks_component_1, lists_component_1, user_component_1, appService_1;
+    var ToDoComponent;
     return {
         setters:[
             function (core_1_1) {
@@ -23,29 +23,29 @@ System.register(["@angular/core", "./tasks.component", "./lists.component", "./u
             function (lists_component_1_1) {
                 lists_component_1 = lists_component_1_1;
             },
-            function (userInfo_component_1_1) {
-                userInfo_component_1 = userInfo_component_1_1;
+            function (user_component_1_1) {
+                user_component_1 = user_component_1_1;
             },
             function (appService_1_1) {
                 appService_1 = appService_1_1;
             }],
         execute: function() {
-            AppComponent = (function () {
-                function AppComponent() {
+            ToDoComponent = (function () {
+                function ToDoComponent() {
                 }
-                AppComponent = __decorate([
+                ToDoComponent = __decorate([
                     core_1.Component({
                         selector: 'list-app',
-                        templateUrl: './app/components/app.html',
-                        directives: [lists_component_1.ListComponent, tasks_component_1.TaskComponent, userInfo_component_1.UserInfo],
+                        templateUrl: 'app/toDo/components/toDo.html',
+                        directives: [lists_component_1.ListComponent, tasks_component_1.TaskComponent, user_component_1.UserComponent],
                         providers: [appService_1.AppService]
                     }), 
                     __metadata('design:paramtypes', [])
-                ], AppComponent);
-                return AppComponent;
+                ], ToDoComponent);
+                return ToDoComponent;
             }());
-            exports_1("AppComponent", AppComponent);
+            exports_1("ToDoComponent", ToDoComponent);
         }
     }
 });
-//# sourceMappingURL=app.component.js.map
+//# sourceMappingURL=toDo.component.js.map

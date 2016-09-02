@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
-import {ListItem, TaskItem} from "../models";
 import {Subject, BehaviorSubject, Observable} from "rxjs/Rx";
 import {Response, Http, Headers, RequestOptions} from "@angular/http";
+import {ListItem, TaskItem} from "../models";
 
 @Injectable()
 export class AppService {

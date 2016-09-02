@@ -1,0 +1,34 @@
+<!Doctype>
+<html>
+<head>
+	<title> WELCOME </title>
+	<link href="../styles.css" rel="stylesheet">
+	<base href="/" />
+</head>
+
+<body>
+<router-outlet></router-outlet>
+
+<div class="note">
+	<p> ORGANIZE YOUR LIFE </p>
+</div>
+
+<div class="welcome">
+	<div class="login">
+		<div>
+			<input type="text" placeholder="Username" id="username">
+			<input type="password" placeholder="password" id="password">
+		</div>
+		<div>
+			<a href="#" class="forgot">forgot password?</a>
+		</div>
+		<div>
+			<input type="submit" value="Sign In" class="sign-in">
+			<input type="submit" value="Sign up" class="sign-up" routerLink="/toDo">
+		</div>
+	</div>
+
+	<div class="shadow"></div>
+
+</div>
+</body>

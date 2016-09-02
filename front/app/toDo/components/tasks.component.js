@@ -66,7 +66,7 @@ System.register(["@angular/core", "../models", "../services/appService"], functi
                 TaskComponent = __decorate([
                     core_1.Component({
                         selector: 'tasks',
-                        templateUrl: './app/components/tasks.html'
+                        templateUrl: 'app/toDo/components/tasks.html'
                     }), 
                     __metadata('design:paramtypes', [appService_1.AppService])
                 ], TaskComponent);

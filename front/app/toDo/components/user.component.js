@@ -11,29 +11,29 @@ System.register(["@angular/core"], function(exports_1, context_1) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var core_1;
-    var UserInfo;
+    var UserComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
             }],
         execute: function() {
-            UserInfo = (function () {
-                function UserInfo() {
+            UserComponent = (function () {
+                function UserComponent() {
                     this.avatarImageUrl = "./app/images/avatar.jpg";
                     this.name = "Voskanyan David";
                 }
-                UserInfo = __decorate([
+                UserComponent = __decorate([
                     core_1.Component({
                         selector: 'user-info',
-                        templateUrl: './app/components/userInfo.html'
+                        templateUrl: 'app/toDo/components/userInfo.html'
                     }), 
                     __metadata('design:paramtypes', [])
-                ], UserInfo);
-                return UserInfo;
+                ], UserComponent);
+                return UserComponent;
             }());
-            exports_1("UserInfo", UserInfo);
+            exports_1("UserComponent", UserComponent);
         }
     }
 });
-//# sourceMappingURL=userInfo.component.js.map
+//# sourceMappingURL=user.component.js.map

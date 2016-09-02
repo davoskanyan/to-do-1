@@ -1,17 +1,17 @@
-import {TaskComponent} from "./components/tasks.component";
-import {ListComponent} from "./components/lists.component";
 import {BrowserModule} from "@angular/platform-browser";
 import {NgModule} from "@angular/core";
-import {AppService} from "./services/appService";
-import {AppComponent} from "./components/app.component";
 import {HttpModule} from "@angular/http";
+import {routing, appRoutingProviders} from "./app.routing";
+import {Welcome} from "./welcome";
+import {ToDoModule} from "./toDo/toDo.module";
+import {PageNotFoundModule} from "./common/pageNotFound.module";
 
 
 @NgModule({
-		imports: [BrowserModule, HttpModule],
-		declarations: [AppComponent, ListComponent, TaskComponent],
-		providers: [AppService],
-		bootstrap: [AppComponent]
+		imports: [BrowserModule, HttpModule, routing, ToDoModule, PageNotFoundModule],
+		declarations: [Welcome],
+		providers: [appRoutingProviders],
+		bootstrap: [Welcome]
 
 	}
 )

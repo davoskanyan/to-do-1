@@ -5,7 +5,7 @@ import {AppService} from "../services/appService";
 
 @Component({
 	selector: 'tasks',
-	templateUrl: './app/components/tasks.html'
+	templateUrl: 'app/toDo/components/tasks.html'
 })
 export class TaskComponent implements OnInit {
 	constructor(private listService:AppService) {
